@@ -1,0 +1,34 @@
+package cn.com.mcd.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import cn.com.mcd.model.KitchenEquipment;
+import cn.com.mcd.util.PagesPojo;
+
+public interface KitchenEquipmentMapper {
+    int deleteByPrimaryKey(Long id);
+
+    int insert(KitchenEquipment record);
+
+    int insertSelective(KitchenEquipment record);
+
+    KitchenEquipment selectByPrimaryKey(Long id);
+
+    int updateByPrimaryKeySelective(KitchenEquipment record);
+
+    int updateByPrimaryKey(KitchenEquipment record);
+    
+    List<KitchenEquipment> queryAllKitchenEquipment(String auditStatus);
+    // add by chanda
+    int countQueryKitchenEquipmentBycondition(Map map);
+    List<KitchenEquipment> queryKitchenEquipmentByconditionAndPage(Map map,PagesPojo<KitchenEquipment> page);
+    
+    //add by bruce.chen01
+    List<KitchenEquipment> queryAll();
+    
+    //任何条件的分页查询
+    int countQueryAllByAnyCondition(Map map);
+    List<KitchenEquipment> queryAllByAnyCondition(Map map,PagesPojo<KitchenEquipment> page);
+    
+}
