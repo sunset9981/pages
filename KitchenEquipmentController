@@ -1,0 +1,97 @@
+package cn.com.mcd.controller;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import cn.com.mcd.common.ResultModel;
+import cn.com.mcd.model.KitchenEquipment;
+import cn.com.mcd.model.VendorScope;
+import cn.com.mcd.service.KitchenEquipmentService;
+import cn.com.mcd.util.Constants;
+import cn.com.mcd.util.PagesPojo;
+import cn.com.mcd.util.UtilValidate;
+
+@Controller
+@RequestMapping("/kitchenequipment")
+public class KitchenEquipmentController implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3030763855780017471L;
+	private static final Logger log = LoggerFactory.getLogger(KitchenEquipmentController.class);
+	
+	@Resource
+	private KitchenEquipmentService kitchenEquipmentService;
+
+
+	@RequestMapping(value = "/queryallkitchenequipment", method = RequestMethod.GET )
+	@ResponseBody
+	public ResultModel queryAllKitchenEquipment() {
+		ResultModel resultModel = new ResultModel();
+
+		List<KitchenEquipment> allKitchenEquipment = kitchenEquipmentService.queryAllKitchenEquipment("审核通过");
+		if (allKitchenEquipment.size()==0||allKitchenEquipment==null) {
+			resultModel.setResultCode(Constants.SERVICE_ERROR_CODE);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_ERROR_MSG);			
+		} else {
+			resultModel.setResultCode(Constants.SERVICE_SUCCESS_CODE);
+			resultModel.setResultData(allKitchenEquipment);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_SUCCESS_MSG);
+		}
+		return resultModel;
+	}
+	
+	@RequestMapping(value = "/queryall", method = RequestMethod.GET )
+	@ResponseBody
+	public ResultModel queryAll() {
+		ResultModel resultModel = new ResultModel();
+
+		List<KitchenEquipment> allKitchenEquipment = kitchenEquipmentService.queryAll();
+		if (allKitchenEquipment.size()==0||allKitchenEquipment==null) {
+			resultModel.setResultCode(Constants.SERVICE_ERROR_CODE);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_ERROR_MSG);			
+		} else {
+			resultModel.setResultCode(Constants.SERVICE_SUCCESS_CODE);
+			resultModel.setResultData(allKitchenEquipment);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_SUCCESS_MSG);
+		}
+		return resultModel;
+	}
+	
+	// 分页
+	@RequestMapping(value = "/queryallbyanycondition", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResultModel queryAllByAnyCondition(@RequestBody PagesPojo<KitchenEquipment> page) {
+
+		ResultModel resultModel = new ResultModel();
+		List<KitchenEquipment> KitchenEquipmentList = null;
+		Map KitchenEquipment = (Map) page.getPages().get(0);
+		int count = kitchenEquipmentService.countQueryAllByAnyCondition(KitchenEquipment);
+		page.setTotalRow(count);
+		KitchenEquipmentList = kitchenEquipmentService.queryAllByAnyCondition(KitchenEquipment, page);
+		page.setPages(KitchenEquipmentList);
+		if (UtilValidate.isNotEmpty(KitchenEquipmentList)) {
+			resultModel.setResultCode(Constants.SERVICE_SUCCESS_CODE);
+			resultModel.setResultData(page);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_SUCCESS_MSG);
+		} else {
+			resultModel.setResultCode(Constants.SERVICE_ERROR_CODE);
+			resultModel.setResultMsg(Constants.DATA_BASE_SEARCH_ERROR_MSG);
+		}
+
+		return resultModel;
+	}
+}
