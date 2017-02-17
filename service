@@ -1,0 +1,18 @@
+package cn.com.mcd.service;
+
+import java.util.List;
+import java.util.Map;
+
+import cn.com.mcd.model.KitchenEquipment;
+import cn.com.mcd.util.PagesPojo;
+
+public interface KitchenEquipmentService {
+
+	List<KitchenEquipment> queryAllKitchenEquipment(String auditStatus);
+	
+	List<KitchenEquipment> queryAll();
+	
+	//任何条件的分页查询
+	int countQueryAllByAnyCondition(Map map);
+    List<KitchenEquipment> queryAllByAnyCondition(Map map,PagesPojo<KitchenEquipment> page);
+}
