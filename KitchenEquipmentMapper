@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.mcd.dao.KitchenEquipmentMapper">
+  <resultMap id="BaseResultMap" type="cn.com.mcd.model.KitchenEquipment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="equ_no" jdbcType="VARCHAR" property="equNo" />
+    <result column="genre" jdbcType="VARCHAR" property="genre" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="category_code" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="sub_category_code" jdbcType="VARCHAR" property="subCategoryCode" />
+    <result column="equ_name" jdbcType="VARCHAR" property="equName" />
+    <result column="equ_type" jdbcType="VARCHAR" property="equType" />
+    <result column="part_no" jdbcType="VARCHAR" property="partNo" />
+    <result column="part_name" jdbcType="VARCHAR" property="partName" />
+    <result column="part_name_en" jdbcType="VARCHAR" property="partNameEn" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="warranty_period" jdbcType="INTEGER" property="warrantyPeriod" />
+    <result column="warranty_unit" jdbcType="VARCHAR" property="warrantyUnit" />
+    <result column="is_warranty_high" jdbcType="VARCHAR" property="isWarrantyHigh" />
+    <result column="audit_status" jdbcType="VARCHAR" property="auditStatus" />
+    <result column="comments" jdbcType="VARCHAR" property="comments" />
+    <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
+    <result column="created_stamp" jdbcType="TIMESTAMP" property="createdStamp" />
+    <result column="is_fixed_asset" jdbcType="VARCHAR" property="isFixedAsset" />
+    <result column="part_parent_id" jdbcType="VARCHAR" property="partParentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, equ_no, genre, brand, category_code, sub_category_code, equ_name, equ_type, part_no, part_name, 
+    part_name_en, unit, warranty_period,warranty_unit, is_warranty_high, audit_status, comments, created_by, 
+    created_stamp, is_fixed_asset,part_parent_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from eps_kitchen_equipment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from eps_kitchen_equipment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.com.mcd.model.KitchenEquipment">
+    insert into eps_kitchen_equipment (id, equ_no, genre, 
+      brand, category_code, sub_category_code, 
+      equ_name, equ_type, part_no, 
+      part_name, part_name_en, unit, 
+      warranty_period,warranty_unit, is_warranty_high, audit_status, 
+      comments, created_by, created_stamp, 
+      is_fixed_asset,part_parent_id
+    values (#{id,jdbcType=BIGINT}, #{equNo,jdbcType=VARCHAR}, #{genre,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}, #{subCategoryCode,jdbcType=VARCHAR}, 
+      #{equName,jdbcType=VARCHAR}, #{equType,jdbcType=VARCHAR}, #{partNo,jdbcType=VARCHAR}, 
+      #{partName,jdbcType=VARCHAR}, #{partNameEn,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, 
+      #{warrantyPeriod,jdbcType=INTEGER}, #{warrantyUnit,jdbcType=VARCHAR},#{isWarrantyHigh,jdbcType=VARCHAR}, #{auditStatus,jdbcType=VARCHAR}, 
+      #{comments,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, #{createdStamp,jdbcType=TIMESTAMP}, 
+      #{isFixedAsset,jdbcType=VARCHAR},#{partParentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.mcd.model.KitchenEquipment">
+    insert into eps_kitchen_equipment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="equNo != null">
+        equ_no,
+      </if>
+      <if test="genre != null">
+        genre,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="categoryCode != null">
+        category_code,
+      </if>
+      <if test="subCategoryCode != null">
+        sub_category_code,
+      </if>
+      <if test="equName != null">
+        equ_name,
+      </if>
+      <if test="equType != null">
+        equ_type,
+      </if>
+      <if test="partNo != null">
+        part_no,
+      </if>
+      <if test="partName != null">
+        part_name,
+      </if>
+      <if test="partNameEn != null">
+        part_name_en,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="warrantyPeriod != null">
+        warranty_period,
+      </if>
+      <if test="warrantyUnit != null">
+        warranty_unit,
+      </if>
+      <if test="isWarrantyHigh != null">
+        is_warranty_high,
+      </if>
+      <if test="auditStatus != null">
+        audit_status,
+      </if>
+      <if test="comments != null">
+        comments,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdStamp != null">
+        created_stamp,
+      </if>
+      <if test="isFixedAsset != null">
+        is_fixed_asset,
+      </if>
+      <if test="partParentId != null">
+        part_parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="equNo != null">
+        #{equNo,jdbcType=VARCHAR},
+      </if>
+      <if test="genre != null">
+        #{genre,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subCategoryCode != null">
+        #{subCategoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="equName != null">
+        #{equName,jdbcType=VARCHAR},
+      </if>
+      <if test="equType != null">
+        #{equType,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="partNameEn != null">
+        #{partNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="warrantyPeriod != null">
+        #{warrantyPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="warrantyPeriod != null">
+        #{warrantyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="isWarrantyHigh != null">
+        #{isWarrantyHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStamp != null">
+        #{createdStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFixedAsset != null">
+        #{isFixedAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="partParentId != null">
+        #{partParentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.mcd.model.KitchenEquipment">
+    update eps_kitchen_equipment
+    <set>
+      <if test="equNo != null">
+        equ_no = #{equNo,jdbcType=VARCHAR},
+      </if>
+      <if test="genre != null">
+        genre = #{genre,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryCode != null">
+        category_code = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subCategoryCode != null">
+        sub_category_code = #{subCategoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="equName != null">
+        equ_name = #{equName,jdbcType=VARCHAR},
+      </if>
+      <if test="equType != null">
+        equ_type = #{equType,jdbcType=VARCHAR},
+      </if>
+      <if test="partNo != null">
+        part_no = #{partNo,jdbcType=VARCHAR},
+      </if>
+      <if test="partName != null">
+        part_name = #{partName,jdbcType=VARCHAR},
+      </if>
+      <if test="partNameEn != null">
+        part_name_en = #{partNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="warrantyPeriod != null">
+        warranty_period = #{warrantyPeriod,jdbcType=INTEGER},
+      </if>
+      <if test="warrantyUnit != null">
+        warranty_unit = #{warrantyUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="isWarrantyHigh != null">
+        is_warranty_high = #{isWarrantyHigh,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        audit_status = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        comments = #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createdStamp != null">
+        created_stamp = #{createdStamp,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isFixedAsset != null">
+        is_fixed_asset = #{isFixedAsset,jdbcType=VARCHAR},
+      </if>
+      <if test="partParentId != null">
+       part_parent_id = #{partParentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.mcd.model.KitchenEquipment">
+    update eps_kitchen_equipment
+    set equ_no = #{equNo,jdbcType=VARCHAR},
+      genre = #{genre,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      category_code = #{categoryCode,jdbcType=VARCHAR},
+      sub_category_code = #{subCategoryCode,jdbcType=VARCHAR},
+      equ_name = #{equName,jdbcType=VARCHAR},
+      equ_type = #{equType,jdbcType=VARCHAR},
+      part_no = #{partNo,jdbcType=VARCHAR},
+      part_name = #{partName,jdbcType=VARCHAR},
+      part_name_en = #{partNameEn,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      warranty_period = #{warrantyPeriod,jdbcType=INTEGER},
+      warranty_unit = #{warrantyUnit,jdbcType=VARCHAR},
+      is_warranty_high = #{isWarrantyHigh,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=VARCHAR},
+      comments = #{comments,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      created_stamp = #{createdStamp,jdbcType=TIMESTAMP},
+      is_fixed_asset = #{isFixedAsset,jdbcType=VARCHAR},
+       part_parent_id = #{partParentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="queryAllKitchenEquipment" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from eps_kitchen_equipment
+    where audit_status = #{audit_status,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- add by bruce -->
+	<select id="queryAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from eps_kitchen_equipment
+	</select>
+	<select id="countQueryAllByAnyCondition"
+		parameterType="java.util.Map" resultType="java.lang.Integer">
+		<if test="equName != null and equName != ''">
+			<bind name="reEquName" value="'%' + _parameter.equName + '%'" />
+		</if>
+		<if test="genre != null and genre != ''">
+			<bind name="reGenre" value="'%' + _parameter.genre + '%'" />
+		</if>
+		<if test="brand != null and brand != ''">
+			<bind name="reBrand" value="'%' + _parameter.brand + '%'" />
+		</if>
+		<if test="partName != null and partName != ''">
+			<bind name="rePartName" value="'%' + _parameter.partName + '%'"/>
+		</if>
+		<if test="auditStatus != null and auditStatus != ''">
+			<bind name="reAuditStatus" value="'%' + _parameter.auditStatus + '%'"/>
+		</if>
+		select count(*) from eps_kitchen_equipment
+		<where>
+			1=1
+			<if test="equName != null and equName != ''">
+				and equ_name LIKE #{reEquName}
+			</if>
+			<if test="genre != null and genre != ''">
+				and genre LIKE #{reGenre}
+			</if>
+			<if test="brand != null and brand != ''">
+				and brand LIKE #{reBrand}
+			</if>
+			<if test="partName != null and partName != ''">
+				and part_name like #{rePartName}
+			</if>
+			<if test="auditStatus != null and auditStatus != ''">
+				and audit_status like #{reAuditStatus}
+			</if>       
+		</where>
+	</select>
+	<select id="queryAllByAnyCondition" resultMap="BaseResultMap">
+		<if test="param1.equName != null and param1.equName != ''">
+			<bind name="reEquName" value="'%' + _parameter.param1.equName + '%'" />
+		</if>
+		<if test="param1.genre != null and param1.genre != ''">
+			<bind name="reGenre" value="'%' + _parameter.param1.genre + '%'" />
+		</if>
+		<if test="param1.brand != null and param1.brand != ''">
+			<bind name="reBrand" value="'%' + _parameter.param1.brand + '%'" />
+		</if>
+		<if test="param1.partName != null and param1.partName != ''">
+			<bind name="rePartName" value="'%' + _parameter.param1.partName + '%'" />
+		</if>
+		<if test="param1.auditStatus != null and param1.auditStatus != ''">
+			<bind name="reAuditStatus" value="'%' + _parameter.param1.auditStatus + '%'" />
+		</if>
+		select top (#{param2.pageSize})
+		<include refid="Base_Column_List" />
+		from eps_kitchen_equipment
+		where id not in(
+		select top (#{param2.start}) equipment.id from eps_kitchen_equipment equipment 
+		
+		<where>
+			<if test="param1.equName != null and param1.equName != ''">
+			and equ_name LIKE #{reEquName}
+			</if>
+			<if test="param1.genre != null and param1.genre != ''">
+				and genre LIKE #{reGenre}
+			</if>
+			<if test="param1.brand != null and param1.brand != ''">
+				and brand LIKE #{reBrand}
+			</if>
+			<if test="param1.partName != null and param1.partName != ''">
+				and part_name like #{rePartName}
+			</if>
+			<if test="param1.auditStatus != null and param1.auditStatus != ''">
+				and audit_status like #{reAuditStatus}
+			</if>
+		</where>
+		
+		<if test="param2.sortColumn != null">
+			order by ${param2.sortColumn}
+			<if test="param2.sortDirection">
+				ASC
+			</if>
+			<if test="!param2.sortDirection">
+				DESC
+			</if>
+		</if>
+		
+		)
+		 
+		<if test="param1.equName != null and param1.equName != ''">
+			and equ_name LIKE #{reEquName}
+		</if>
+		<if test="param1.genre != null and param1.genre != ''">
+			and genre LIKE #{reGenre}
+		</if>
+		<if test="param1.brand != null and param1.brand != ''">
+			and brand LIKE #{reBrand}
+		</if>
+		<if test="param1.partName != null and param1.partName != ''">
+			and part_name like #{rePartName}
+		</if>
+		<if test="param1.auditStatus != null and param1.auditStatus != ''">
+			and audit_status like #{reAuditStatus}
+		</if>
+
+		<if test="param2.sortColumn != null">
+			order by ${param2.sortColumn}
+			<if test="param2.sortDirection">
+				ASC
+			</if>
+			<if test="!param2.sortDirection">
+				DESC
+			</if>
+		</if>
+	</select>
+  <!-- add by bruce -->
+  
+  <!-- add by chanda -->
+  <select id="countQueryKitchenEquipmentBycondition" parameterType="java.util.Map" resultType="java.lang.Integer">
+    <if test="brand != null and brand != ''">
+		<bind name="reBrand" value="'%' + _parameter.brand + '%'" />
+	</if>
+	<if test="categoryCode != null and categoryCode != ''">
+		<bind name="reCategoryCode" value="'%' + _parameter.categoryCode + '%'" />
+	</if>
+	<if test="equName != null and equName != ''">
+		<bind name="reEquName" value="'%' + _parameter.equName + '%'" />
+	</if>
+	<if test="equType != null and equType != ''">
+		<bind name="reEquType" value="'%' + _parameter.equType + '%'" />
+	</if>
+    select count(*) from eps_kitchen_equipment
+    <where> 1=1
+        <if test="brand != null and brand != '' ">
+			and brand LIKE #{reBrand} 
+		</if> 
+		<if test="categoryCode != null and categoryCode != '' ">
+			and category_code LIKE #{reCategoryCode} 
+		</if>
+		<if test="equName != null and equName != '' ">
+			and equ_name LIKE #{reEquName} 
+		</if>
+		<if test="equType != null and equType != '' ">
+			and equ_type LIKE #{reEquType} 
+		</if>
+	</where> 
+  </select>
+  <select id="queryKitchenEquipmentByconditionAndPage"  resultMap="BaseResultMap">
+    <if test="param1.brand != null and param1.brand != ''">
+		<bind name="reBrand" value="'%' + _parameter.param1.brand + '%'" />
+	</if>
+	<if test="param1.categoryCode != null and param1.categoryCode != ''">
+		<bind name="reCategoryCode" value="'%' + _parameter.param1.categoryCode + '%'" />
+	</if>
+	<if test="param1.equName != null and param1.equName != ''">
+		<bind name="reEquName" value="'%' + _parameter.param1.equName + '%'" />
+	</if>
+	<if test="param1.equType != null and param1.equType != ''">
+		<bind name="reEquType" value="'%' + _parameter.param1.equType + '%'" />
+	</if>
+    select top (#{param2.pageSize})
+    	<include refid="Base_Column_List" />
+    from eps_kitchen_equipment
+    where id not in(
+    	select top (#{param2.start}) equipment.id from eps_kitchen_equipment equipment
+    )
+        <if test="param1.brand != null and param1.brand != '' ">
+			and brand LIKE #{reBrand} 
+		</if> 
+		<if test="param1.categoryCode != null and param1.categoryCode != '' ">
+			and category_code LIKE #{reCategoryCode} 
+		</if>
+		<if test="param1.equName != null and param1.equName != '' ">
+			and equ_name LIKE #{reEquName} 
+		</if>
+		<if test="param1.equType != null and param1.equType != '' ">
+			and equ_type LIKE #{reEquType} 
+		</if>
+	
+		<if test="param2.sortColumn != null">
+	       order by ${param2.sortColumn} 
+			<if test="param2.sortDirection">
+	        	ASC
+		    </if>
+		    <if test="!param2.sortDirection">
+		      	DESC
+		    </if>
+	    </if>
+  </select>
+  <!-- add by chanda -->
+</mapper>
