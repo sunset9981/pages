@@ -1,0 +1,81 @@
+package cn.com.mcd.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+
+import cn.com.mcd.dao.KitchenEquipmentMapper;
+import cn.com.mcd.exception.rest.exhandler.DataBaseAccessException;
+import cn.com.mcd.model.KitchenEquipment;
+import cn.com.mcd.model.VendorScope;
+import cn.com.mcd.service.KitchenEquipmentService;
+import cn.com.mcd.util.PagesPojo;
+
+@Service("kitchenEquipmentService")
+public class KitchenEquipmentServiceImpl implements KitchenEquipmentService {
+
+	private static final Logger log = LoggerFactory.getLogger(KitchenEquipmentServiceImpl.class);
+	@Resource 
+	private KitchenEquipmentMapper kitchenEquipmentMapper;
+	
+	@Override
+	public List<KitchenEquipment> queryAllKitchenEquipment(String auditStatus) {
+		List<KitchenEquipment> result=new ArrayList<KitchenEquipment>();
+		try{
+			result=kitchenEquipmentMapper.queryAllKitchenEquipment(auditStatus);
+		}catch(DataBaseAccessException e){
+			 log.error("queryAllKitchenEquipment kitchen equipment table fail",e);
+			 throw new DataBaseAccessException("queryAllKitchenEquipment kitchen equipment table fail");
+		}
+		return result;
+	}
+	
+	@Override
+	public List<KitchenEquipment> queryAll() {
+		
+		List<KitchenEquipment> result = null;
+		try{
+			result=kitchenEquipmentMapper.queryAll();
+		}catch(Exception e){
+			 log.error("queryAllKitchenEquipment kitchen equipment table fail",e);
+			 throw new DataBaseAccessException("queryAllKitchenEquipment kitchen equipment table fail");
+		}
+		
+		return result;
+	}
+	
+	//任何条件的分页查询
+	@Override
+	public int countQueryAllByAnyCondition(Map record) {
+		
+		int countQueryAll = 0;
+		try{
+			countQueryAll = kitchenEquipmentMapper.countQueryAllByAnyCondition(record);
+		}catch (Exception e) {
+			log.error("countQueryAllByAnyCondition search kitchen equipment table fail", e);
+			throw new DataBaseAccessException("countQueryAllByAnyCondition search kitchen equipment table fail");
+		}
+		return countQueryAll;
+	}
+
+	@Override
+	public List<KitchenEquipment> queryAllByAnyCondition(Map record, PagesPojo<KitchenEquipment> page) {
+		// TODO Auto-generated method stub
+		List<KitchenEquipment> result = null;
+		try{
+			result=kitchenEquipmentMapper.queryAllByAnyCondition(record, page);
+		}catch(Exception e){
+			 log.error("queryAllByAnyCondition search kitchen equipment table fail",e);
+			 throw new DataBaseAccessException("queryAllByAnyCondition search kitchen equipment table fail");
+		}
+		return result;
+	}
+
+
+}
